@@ -215,7 +215,7 @@ public class NewFrame2 extends JFrame {
 					corrent = 0;
 					uncorrent = 0;
 					problem.problems = miss;
-					miss = null;
+					miss = new ArrayList<>();
 				}else {
 					System.out.println("ほんとに終わり");
 				}
@@ -229,11 +229,11 @@ public class NewFrame2 extends JFrame {
 		
 	}
 	public void TextDescription(String[] problem) {
-			problemText.setText("記述問題\n");
+			problemText.setText(problemNumber + "記述問題\n");
 			unk0(problem[3]);
 	}
 	public Set<Integer> TextChoice(String[] problem) {
-		problemText.setText("選択問題\n");
+		problemText.setText(problemNumber + "選択問題\n");
 		problem = iranaiCut(problem);
 		unk0(problem[3]);
 		Set<Integer> textNumber = rundom(problem);
@@ -246,7 +246,7 @@ public class NewFrame2 extends JFrame {
 		return textNumber;
 	}
 	public Set<Integer> TextPerfect(String[] problem) {
-		problemText.setText("完答問題\n");
+		problemText.setText(problemNumber + "完答問題\n");
 		problem = iranaiCut(problem);
 			unk0(problem[3]);
 		Set<Integer> textNumber = rundom(problem);
@@ -259,7 +259,7 @@ public class NewFrame2 extends JFrame {
 		return textNumber;
 	}
 	public Set<Integer> TextSort(String[] problem) {
-		problemText.setText("並べ替え問題\n");
+		problemText.setText(problemNumber + "並べ替え問題\n");
 		problem = iranaiCut(problem);
 		unk0(problem[3]);
 		Set<Integer> textNumber = rundom(problem);
