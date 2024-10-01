@@ -5,19 +5,21 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Problem extends Text{
+public class Problem extends Input{
 	public List<String[]> problems = new ArrayList<>();
 	public Problem() {
 		Set<Integer> quizNumber = new LinkedHashSet<>();
 		while(true) {
-			int num = new java.util.Random().nextInt(text.length);//問題数分番号格納
+			int num = new java.util.Random().nextInt(text.size());//問題数分番号格納
 			quizNumber.add(num);
-			if(quizNumber.size() == text.length) {
+			if(quizNumber.size() == text.size()) {
 				break;
 			}
 		}
 		for(int i : quizNumber) {
-			problems.add(text[i]);
+			if(!(i == 0)) {
+			problems.add(text.get(i));
+			}
 		}
 	}
 	public  boolean description(String[] problem,String ans) {

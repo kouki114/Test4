@@ -24,6 +24,8 @@ public class NewFrame2 extends JFrame {
 	Problem problem = new Problem();
 	JPanel p1 = new JPanel();
 	JPanel p2 = new JPanel();
+	JPanel p3 = new JPanel();
+	JPanel p4 = new JPanel();
 	JButton b1 = new JButton("1");
 	JButton b2 = new JButton("2");
 	JButton b3 = new JButton("3");
@@ -37,7 +39,7 @@ public class NewFrame2 extends JFrame {
 	JTextField result = new JTextField();
 	public NewFrame2() {
 		super("test");
-		this.setLayout(new GridLayout(4,1));
+		this.setLayout(new GridLayout(2,1));
 		this.add(problemText);
 		problemText.setText("ここには問題が出ます\n"
 				+ "左上が問題の種類です\n"
@@ -45,11 +47,16 @@ public class NewFrame2 extends JFrame {
 				+ "それ以外の場合は入力するかボタンで入力してください\n"
 				+ "入力後、決定を押すと正解が出ます\n"
 				+ "（Enterで決定できません）");
-		this.add(ansText);
+		
+		this.add(p3);
+		p4.setLayout(new GridLayout(2,1));
+		p3.setLayout(new GridLayout(2,1));
+		p3.add(p4);
+		p3.add(p2);
+		p4.add(ansText);
 		ansText.setText("ここには答えが出ます\n"
 				+ "答えが出た後に決定を押すと次の問題に移ります");
-		this.add(result);
-		this.add(p2);
+		p4.add(result);
 		p2.setLayout(new GridLayout(2,4));
 		p2.add(b1);
 		b1.addActionListener(new ActionListener() {
@@ -178,17 +185,17 @@ public class NewFrame2 extends JFrame {
 						}
 						switch(problem.problems.get(problemNumber)[0]) {
 						case "記述" ->{
-							ansText.setText(ansText.getText() + problem.problems.get(problemNumber)[2]);
+							unk1(problem.problems.get(problemNumber)[2]);
 						}
 						case "選択" ->{
-							ansText.setText(ansText.getText() + problem.problems.get(problemNumber)[2]);
-							ansText.setText(ansText.getText() + problem.problems.get(problemNumber)[4]);
+							unk1(problem.problems.get(problemNumber)[2]);
+							unk1(problem.problems.get(problemNumber)[4]);
 						}
 						case "完答" ->{
-							ansText.setText(ansText.getText() + problem.problems.get(problemNumber)[2]);
+							unk1(problem.problems.get(problemNumber)[2]);
 						}
 						case "並べ替え" ->{
-							ansText.setText(ansText.getText() + problem.problems.get(problemNumber)[2]);
+							unk1(problem.problems.get(problemNumber)[2]);
 						}
 						}
 						ansText.setText(ansText.getText() + "決定を押すと次の問題に移ります");
@@ -223,38 +230,43 @@ public class NewFrame2 extends JFrame {
 	}
 	public void TextDescription(String[] problem) {
 			problemText.setText("記述問題\n");
-			problemText.setText(problemText.getText() + problem[3]);
+			unk0(problem[3]);
 	}
 	public Set<Integer> TextChoice(String[] problem) {
 		problemText.setText("選択問題\n");
-		problemText.setText(problemText.getText() + problem[3]);
+		problem = iranaiCut(problem);
+		unk0(problem[3]);
 		Set<Integer> textNumber = rundom(problem);
 		int count = 1;
 		for(int j : textNumber) {//rundomメソッドで作った数字に対応する行の選択肢を出力する
-			problemText.setText(problemText.getText() + (count + " : " + problem[j + 4]));
+				problemText.setText(problemText.getText() + (count + " : ") + "\n");
+				unk0(problem[j + 4]);
 			count++;
 		}
 		return textNumber;
 	}
 	public Set<Integer> TextPerfect(String[] problem) {
 		problemText.setText("完答問題\n");
-		problemText.setText(problemText.getText() + problem[3]);
+		problem = iranaiCut(problem);
+			unk0(problem[3]);
 		Set<Integer> textNumber = rundom(problem);
 		int count = 1;
 		for(int j : textNumber) {//rundomメソッドで作った数字に対応する行の選択肢を出力する
-			problemText.setText(problemText.getText() + count + " : " + problem[j + 4]);
+				problemText.setText(problemText.getText() + (count + " : ") + "\n");
+				unk0(problem[j + 4]);
 			count++;
 		}
 		return textNumber;
 	}
 	public Set<Integer> TextSort(String[] problem) {
-		problemText.setText("並べ替え\n");
-		problemText.setText(problemText.getText() + problem[3]);
+		problemText.setText("並べ替え問題\n");
+		problem = iranaiCut(problem);
+		unk0(problem[3]);
 		Set<Integer> textNumber = rundom(problem);
 		int count = 1;
 		for(int j : textNumber) {//rundomメソッドで作った数字に対応する行の選択肢を出力する
-			System.out.println(count + " : " + problem[j + 4]);
-			problemText.setText(problemText.getText() + count + " : " + problem[j + 4]);
+				problemText.setText(problemText.getText() + (count + " : ") + "\n");
+				unk0(problem[j + 4]);
 			count++;
 		}
 		return textNumber;
@@ -275,5 +287,50 @@ public class NewFrame2 extends JFrame {
 		}
 		return num;
 	}
-
+	public String[] iranaiCut(String[] str) {
+		List<String> a = new ArrayList<>();
+		for(int i = 0 ; i < str.length  ; i++) {
+			if(str[i].contains("$") ) {
+			}else {
+				a.add(str[i]);
+			}
+		}
+		String[] b = new String[a.size()];
+		for(int i = 0 ; i < a.size() ; i++) {
+			b[i] = a.get(i);
+		}
+		return b;
+	}
+	public void unk0(String str) {
+		boolean a = true;
+		if(str.contains("%")) {
+			while(a) {
+				if(str.indexOf("%") == str.lastIndexOf("%")) {
+					problemText.setText(problemText.getText() + str.split("%")[0] + "\n" + str.split("%")[1] + "\n");
+					a = false;
+				}else {
+					problemText.setText(problemText.getText() + str.split("%")[0] + "\n");
+					str = str.substring(str.indexOf("%") + 1,str.length());
+				}
+			}
+		}else {
+			problemText.setText(problemText.getText() + str + "\n");
+		}
+	}
+	public void unk1(String str) {
+		boolean a = true;
+		if(str.contains("%")) {
+			while(a) {
+				if(str.indexOf("%") == str.lastIndexOf("%")) {
+					ansText.setText(ansText.getText() + str.split("%")[0] + "\n" + str.split("%")[1] + "\n");
+					a = false;
+				}else {
+					ansText.setText(ansText.getText() + str.split("%")[0] + "\n");
+					str = str.substring(str.indexOf("%") + 1,str.length());
+				}
+			}
+		}else {
+			ansText.setText(ansText.getText() + str + "\n");
+		}
+	}
 }
