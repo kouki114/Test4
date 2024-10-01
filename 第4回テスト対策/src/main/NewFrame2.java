@@ -290,7 +290,7 @@ public class NewFrame2 extends JFrame {
 	public String[] iranaiCut(String[] str) {
 		List<String> a = new ArrayList<>();
 		for(int i = 0 ; i < str.length  ; i++) {
-			if(str[i].contains("$") ) {
+			if(str[i].equals("") && i > 4 ) {
 			}else {
 				a.add(str[i]);
 			}
