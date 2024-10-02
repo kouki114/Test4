@@ -1,4 +1,4 @@
-package main;
+
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,7 +13,7 @@ public class Input {
 	List<String[]> text = new ArrayList<>();
 	public Input() {
 		// TODO 自動生成されたメソッド・スタブ
-		File file = new File("test4File_2.csv");
+		File file = new File(new File(".").getAbsoluteFile().getParent()+ "\\" + "第4回テスト対策\\test4File_2.csv");
 		BufferedReader br1 = new BufferedReader(new InputStreamReader(System.in));
 		try {
 			br1 = new BufferedReader(new FileReader(file));
