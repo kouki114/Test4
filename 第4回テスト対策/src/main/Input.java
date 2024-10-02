@@ -15,7 +15,7 @@ public class Input {
 	List<String[]> text = new ArrayList<>();
 	public Input() {
 		// TODO 自動生成されたメソッド・スタブ
-		File file = new File(new File(".").getAbsoluteFile().getParent()+ "\\" + "第4回テスト対策\\test4File_2.csv");
+		File file = new File(new File(".").getAbsoluteFile().getParent()+ "\\" + "test4File2.csv");
 		BufferedReader br1 = new BufferedReader(new InputStreamReader(System.in));
 		try {
 			br1 = new BufferedReader(new FileReader(file));
@@ -30,6 +30,7 @@ public class Input {
 				while ((line = br1.readLine()) != null) {
 					
 				    text.add(csvSplit(line));
+				    System.out.println(line);
 				    
 				    }
 			} catch (IOException e) {
